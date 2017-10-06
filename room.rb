@@ -12,4 +12,9 @@ attr_reader :name, :guests, :songs
     return @guests.count()
   end
 
+  def guest_check_in(guest_name)
+    @guests << guest_name
+  end
+
+
 end

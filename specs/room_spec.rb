@@ -19,4 +19,9 @@ class TestRoom < MiniTest::Test
     assert_equal(0, @room.guest_count)
   end
 
+  def test_check_in_guest
+    @room.guest_check_in(@guest)
+    assert_equal(1, @room.guest_count)
+  end
+
 end
