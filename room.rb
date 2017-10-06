@@ -2,13 +2,17 @@ require_relative( 'songs.rb' )
 
 class Room
 
-attr_reader :name, :guests, :songs, :playlist
-  def initialize(name)
+attr_reader :name, :guests, :songs, :playlist, :fee, :capacity
+attr_writer :guests, :fee
+
+  def initialize(name, fee, capacity)
     @name = name
     @guests = []
     @songs = []
     @playlist = []
     @playlist << @songs
+    @fee = fee
+    @capacity = capacity
 
     #Songs and artist are added into an array, which is pushed into playlist.
 
@@ -20,7 +24,7 @@ attr_reader :name, :guests, :songs, :playlist
 
   def guest_check_in(guest_name)
       @guests << guest_name
-      if @guests.count > 2
+      if @guests.count > @capacity
         @guests.pop()
         return "The room is full"
       end
@@ -73,7 +77,14 @@ attr_reader :name, :guests, :songs, :playlist
     end
   end
 
+  def guest_charged(guest_name, fee)
+    return guest_name.money - fee
+  end
 
+
+#Need to add and find new rooms.
+# check room prices
+# list most expensive and cheapest
 
 
 

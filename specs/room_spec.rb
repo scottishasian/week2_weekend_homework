@@ -8,10 +8,11 @@ require( 'minitest/rg' )
 class TestRoom < MiniTest::Test
 
   def setup
-    @room = Room.new("Singing Room")
-    @guest = Guests.new("Zoe")
-    @guest2 = Guests.new("Max")
-    @guest3 = Guests.new("Naomi")
+    @room = Room.new("Singing Room", 400, 2)
+    @room2 = Room.new("Pricey Room", 1000, 4)
+    @guest = Guests.new("Zoe", 1000)
+    @guest2 = Guests.new("Max", 800)
+    @guest3 = Guests.new("Naomi", 300)
     @songs = Songs.new("Song 2", "Blur")
   end
 
@@ -85,6 +86,17 @@ class TestRoom < MiniTest::Test
     @room.guest_check_in(@guest2)
     result = @room.guest_check_in(@guest3)
     assert_equal("The room is full", result)
+  end
+
+  def test_room_fee
+    assert_equal(400, @room.fee)
+  end
+
+  def test_guest_charged
+    @room.guest_check_in(@guest)
+    result = @room.find_guest(@guest.name)
+    updated = @room.guest_charged(result, @room.fee)
+    assert_equal(600, updated)
   end
 
 end
