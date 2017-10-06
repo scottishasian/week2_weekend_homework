@@ -20,7 +20,15 @@ attr_reader :name, :guests, :songs
 
   def find_guest(guest_name)
     result = @guests.find{|guest| guest.name == guest_name}
-    return result.name
+    return result
+  end
+
+  def guest_check_out(guest_name)
+    result = find_guest(guest_name)
+      if result.name == guest_name
+        # @guests.pop()
+        @guests.delete(result)
+     end
   end
 
 

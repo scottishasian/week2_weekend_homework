@@ -23,12 +23,18 @@ class TestRoom < MiniTest::Test
   def test_check_in_guest
     @room.guest_check_in(@guest)
     guest_found = @room.find_guest(@guest.name)
-    assert_equal(@guest.name, guest_found)
+    assert_equal(@guest, guest_found)
   end
 
   def test_find_guest_by_name
     @room.guest_check_in(@guest)
-    assert_equal("Zoe", @room.find_guest(@guest.name))
+    assert_equal(@guest, @room.find_guest(@guest.name))
+  end
+
+  def test_check_out_guest
+    @room.guest_check_in(@guest)
+    @room.guest_check_out(@guest.name)
+    assert_equal(0, @room.guest_count)
   end
 
 end
