@@ -19,8 +19,14 @@ attr_reader :name, :guests, :songs, :playlist
   end
 
   def guest_check_in(guest_name)
-    @guests << guest_name
+      @guests << guest_name
+      if @guests.count > 2
+        @guests.pop()
+        return "The room is full"
+      end
   end
+
+  #Come back to this one, should be a way to loop.
 
   def find_guest(guest_name)
     result = @guests.find{|guest| guest.name == guest_name}

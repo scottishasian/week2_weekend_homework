@@ -11,6 +11,7 @@ class TestRoom < MiniTest::Test
     @room = Room.new("Singing Room")
     @guest = Guests.new("Zoe")
     @guest2 = Guests.new("Max")
+    @guest3 = Guests.new("Naomi")
     @songs = Songs.new("Song 2", "Blur")
   end
 
@@ -77,6 +78,13 @@ class TestRoom < MiniTest::Test
     @room.guest_check_in(@guest)
     @room.guest_check_in(@guest2)
     assert_equal("The room has 2 people.", @room.room_capacity)
+  end
+
+  def test_room_full
+    @room.guest_check_in(@guest)
+    @room.guest_check_in(@guest2)
+    result = @room.guest_check_in(@guest3)
+    assert_equal("The room is full", result)
   end
 
 end
