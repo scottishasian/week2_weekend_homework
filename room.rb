@@ -1,3 +1,5 @@
+
+
 class Room
 
 attr_reader :name, :guests, :songs
@@ -15,6 +17,12 @@ attr_reader :name, :guests, :songs
   def guest_check_in(guest_name)
     @guests << guest_name
   end
+
+  def find_guest(guest_name)
+    result = @guests.find{|guest| guest.name == guest_name}
+    return result.name
+  end
+
 
 
 end

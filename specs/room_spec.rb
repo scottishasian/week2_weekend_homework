@@ -1,4 +1,5 @@
 require_relative( '../room.rb' )
+require( 'pry' )
 require_relative( '../guests.rb' )
 require( 'minitest/autorun' )
 require( 'minitest/rg' )
@@ -7,7 +8,7 @@ class TestRoom < MiniTest::Test
 
   def setup
     @room = Room.new("Singing Room")
-    @guests = Guests.new("Zoe")
+    @guest = Guests.new("Zoe")
     # @songs = Songs.new()
   end
 
@@ -21,7 +22,13 @@ class TestRoom < MiniTest::Test
 
   def test_check_in_guest
     @room.guest_check_in(@guest)
-    assert_equal(1, @room.guest_count)
+    guest_found = @room.find_guest(@guest.name)
+    assert_equal(@guest.name, guest_found)
+  end
+
+  def test_find_guest_by_name
+    @room.guest_check_in(@guest)
+    assert_equal("Zoe", @room.find_guest(@guest.name))
   end
 
 end
