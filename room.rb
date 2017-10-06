@@ -31,6 +31,19 @@ attr_reader :name, :guests, :songs
      end
   end
 
+  def show_songs
+    return @songs
+  end
+
+  def add_song_and_artist(song_name, artist)
+    folder = []
+    folder << song_name
+    folder << artist
+    @songs << folder
+  end
+
+
+
 
 
 end
