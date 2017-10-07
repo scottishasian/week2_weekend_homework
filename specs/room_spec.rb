@@ -12,7 +12,9 @@ class TestRoom < MiniTest::Test
     @room2 = Room.new("Pricey Room", 1000, 4)
     @guest = Guests.new("Zoe", 1000)
     @guest2 = Guests.new("Max", 800)
-    @guest3 = Guests.new("Naomi", 300)
+    @guest3 = Guests.new("Naomi", 500)
+    @guest4 = Guests.new("Emma", 200)
+    @guest5 = Guests.new("Steve", 300)
     @songs = Songs.new("Song 2", "Blur")
   end
 
@@ -82,6 +84,15 @@ class TestRoom < MiniTest::Test
   end
 
   def test_room_full
+    @room2.guest_check_in(@guest)
+    @room2.guest_check_in(@guest2)
+    @room2.guest_check_in(@guest3)
+    @room2.guest_check_in(@guest4)
+    result = @room2.guest_check_in(@guest5)
+    assert_equal("The room is full", result)
+  end
+
+  def test_room_full_large_room
     @room.guest_check_in(@guest)
     @room.guest_check_in(@guest2)
     result = @room.guest_check_in(@guest3)

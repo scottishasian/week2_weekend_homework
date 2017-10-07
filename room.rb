@@ -27,6 +27,8 @@ attr_writer :guests, :fee
       if @guests.count > @capacity
         @guests.pop()
         return "The room is full"
+      else
+        return "Error"
       end
   end
 
