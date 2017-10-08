@@ -11,8 +11,13 @@ class TestCommand < MiniTest::Test
     @room2 = Room.new("Pricey Room", 1000, 4)
   end
 
-  def test_show_rooms
-    assert_equal([], @command.rooms)
+  def test_show_rooms_empty
+    assert_equal([], @command.show_rooms)
+  end
+
+  def test_add_rooms
+    @command.add_rooms(@room)
+    assert_equal(@command.rooms, @command.show_rooms)
   end
 
 end

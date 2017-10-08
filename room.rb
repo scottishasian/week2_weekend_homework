@@ -49,6 +49,7 @@ attr_writer :guests, :fee
 
   def show_songs
     return @playlist
+    puts @playlist
   end
 
   def add_song_and_artist(song_name, artist)
@@ -80,7 +81,11 @@ attr_writer :guests, :fee
   end
 
   def guest_charged(guest_name, fee)
-    return guest_name.money - fee
+    if guest_name.money >= fee
+      return guest_name.money -= fee
+    else
+      return "Not enough money."
+    end
   end
 
 

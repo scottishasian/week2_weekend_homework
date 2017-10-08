@@ -44,6 +44,7 @@ class TestRoom < MiniTest::Test
   end
 
   def test_show_songs
+    @room.add_song_and_artist(@songs.song_name, @songs.artist)
     result = @room.show_songs
     assert_equal(@room.playlist, result)
   end
@@ -108,6 +109,20 @@ class TestRoom < MiniTest::Test
     result = @room.find_guest(@guest.name)
     updated = @room.guest_charged(result, @room.fee)
     assert_equal(600, updated)
+  end
+
+  def test_guest_charged_next_room
+    @room2.guest_check_in(@guest)
+    result = @room2.find_guest(@guest.name)
+    updated = @room2.guest_charged(result, @room2.fee)
+    assert_equal(0, updated)
+  end
+
+  def test_guest_charged_not_enough_money
+    @room2.guest_check_in(@guest4)
+    result = @room2.find_guest(@guest4.name)
+    updated = @room2.guest_charged(result, @room2.fee)
+    assert_equal("Not enough money.", updated)
   end
 
 end
